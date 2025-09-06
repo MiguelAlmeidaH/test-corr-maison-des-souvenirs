@@ -1,0 +1,108 @@
+/* Couleurs utiles */
+:root{
+  --bg: #0e1014;       /* fond uni sombre */
+  --text: #eae6da;     /* texte (blanc cassé) */
+  --panel: #161a21;    /* carte texte/choix */
+  --panel-2: #1b2027;  /* hover carte/bouton */
+  --muted: #a3adb8;    /* légendes (caption) */
+  --border: #2d3540;   /* bordures */
+  --accent: #b8a368;   /* halo focus */
+  --radius: 16px;
+}
+
+/* Base */
+html, body, tw-story {
+  background: var(--bg);
+  color: var(--text);
+  font-family: Georgia, "Times New Roman", serif;
+  line-height: 1.6;
+}
+
+/* Passage (apparition douce, tu peux supprimer si tu veux 0 animation) */
+tw-passage { animation: fade-in 220ms ease-out both; }
+@keyframes fade-in { from {opacity:0; transform: translateY(4px);} to {opacity:1; transform:none;} }
+
+/* Mise en page */
+.scene-layout{
+  max-width: 960px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* Image en tête (version <img>) */
+.scene-image{
+  border-radius: var(--radius);
+  overflow: hidden;
+  border: 1px solid var(--border);
+}
+.scene-image img{
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Cartes texte & choix (fond sobre + bordure) */
+.scene-text, .scene-choices{
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1rem 1.1rem;
+}
+
+.scene-text p{ margin: 0 0 .9rem; }
+.scene-text p:last-child{ margin-bottom: 0; }
+
+/* Légende (ok chez toi) */
+.scene-caption{
+  color: var(--muted);
+  font-style: italic;
+  font-size: .92rem;
+  margin-top: .35rem;
+}
+
+/* Choix (Harlowe = <tw-link>) */
+.scene-choices{
+  padding: .85rem;
+}
+.scene-choices tw-link,
+.scene-choices a{
+  display: block;
+  padding: .65rem .8rem;
+  margin: .45rem 0;
+  color: var(--text);
+  text-decoration: none;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: rgba(34,40,49,.55);
+  transition: background .15s ease, border-color .15s ease, transform .06s ease, box-shadow .15s ease;
+  font-weight: 600;
+  letter-spacing: .2px;
+}
+.scene-choices tw-link:hover,
+.scene-choices a:hover{
+  background: var(--panel-2);
+  border-color: #3a4350;
+}
+.scene-choices tw-link:active,
+.scene-choices a:active{
+  transform: translateY(1px);
+}
+.scene-choices tw-link:focus,
+.scene-choices a:focus{
+  outline: 0;
+  box-shadow: 0 0 0 3px rgba(184,163,104,.35);
+  border-color: var(--accent);
+}
+
+/* Liens généraux (au cas où) */
+tw-link, a { color: #6c87a7; text-decoration: none; }
+tw-link:hover, a:hover { color: var(--text); }
+
+/* Responsive léger */
+@media (max-width: 720px){
+  .scene-layout{ gap: .85rem; }
+  .scene-text, .scene-choices{ border-radius: 12px; }
+}
